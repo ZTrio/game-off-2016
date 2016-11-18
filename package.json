@@ -28,7 +28,9 @@
     "lodash": "^4.16.6",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "three": "^0.82.1"
+    "three": "^0.82.1",
+    "webworkify-webpack": "^2.0.1",
+    "whs": "^1.1.9"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

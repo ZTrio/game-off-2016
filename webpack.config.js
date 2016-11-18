@@ -14,12 +14,10 @@ module.exports = {
     filename: 'app.js'
   },
 
+  target: 'web',
+
   alias:{
     root: __dirname + '/./',
-  },
-  
-  resolve: {
-    extensions: ['', '.js', '.scss'],
   },
   
   module: {
@@ -37,6 +35,18 @@ module.exports = {
       }
     ]
   },
+
+  plugins: [
+    new webpack.NormalModuleReplacementPlugin(/inline\-worker/, 'webworkify-webpack'),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        hoist_funs: false, // Turn this off to prevent errors with Ammo.js
+        warnings: false
+      },
+      minimize: true
+    }),
+    new webpack.optimize.DedupePlugin()
+  ],
 
   node: {
     fs: "empty",
