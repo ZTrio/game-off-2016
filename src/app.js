@@ -34,7 +34,6 @@ class Editor extends React.Component {
   constructor(props, context){
     super(props, context);
     this.cameraPosition = new THREE.Vector3(0, 25, 50);
-    this.state = {};
   }
 
   render(){
