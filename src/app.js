@@ -70,6 +70,12 @@ class Editor extends React.Component {
     this.directionalLightPosition = new THREE.Vector3(10, 10.75, 10);
     this.directionalLightPosition.multiplyScalar(10);
 
+    this.hemisphereLightSkyColor = new THREE.Color(0xffffff);
+    this.hemisphereLightSkyColor.setHSL(0.6, 1, 0.6);
+    this.hemisphereLightGroundColor = new THREE.Color(0xffffff);
+    this.hemisphereLightGroundColor.setHSL(0.095, 1, 0.75);
+    this.hemisphereLightPosition = new THREE.Vector3(0, 500, 0);
+
     this.state = {};
   }
 
@@ -115,6 +121,11 @@ class Editor extends React.Component {
                 shadowCameraBottom={-150}
                 shadowCameraFar={3500}
                 shadowBias={-0.0001}
+            />
+            <hemisphereLight
+                skyColor={this.hemisphereLightSkyColor}
+                groundColor={this.hemisphereLightGroundColor}
+                position={this.hemisphereLightPosition}
             />
             <Anchor />
             <Ground />
