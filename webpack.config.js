@@ -15,10 +15,6 @@ module.exports = {
     path: __dirname + '/dist/',
     filename: 'app.js'
   },
-
-  alias:{
-    root: __dirname + '/./',
-  },
   
   resolve: {
     extensions: ['', '.js', '.scss'],

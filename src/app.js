@@ -6,93 +6,28 @@ import VoxLoader from './VoxLoader/Vox.js';
 import GameLoop from 'fixed-game-loop';
 import KeyDrown from 'keydrown';
 import modelNames from './modelNames.json';
-import Ground from './components/Ground';
+import Editor from './components/Editor';
 
 const OrbitControls = require('three-orbit-controls')(THREE);
 
-
-class Anchor extends React.Component {
-  constructor(props, context){
-    super(props, context);
+class EditorContainer extends React.Component {
+  constructor(){
+    super();
   }
 
-  render(){
-    return (
-      <mesh>
-        <boxGeometry
-            width={1}
-            height={1}
-            depth={1}
-        />
-        <meshBasicMaterial color={0xFF0000}/>
-      </mesh>      
-    );
+  render() {
+    return
+    <div>
+      <div id="uiContainer">
+        <select>
+          {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>})}
+        </select>
+      </div>
+      <Editor />
+    </div>
   }
 }
 
-class Editor extends React.Component {
-  constructor(props, context){
-    super(props, context);
-    this.cameraPosition = new THREE.Vector3(0, 25, 50);
-  }
-
-  render(){
-    const width = window.innerWidth; // canvas width
-    const height = window.innerHeight; // canvas height    
-    
-    return (
-      <div>
-        <div id="uiContainer">
-          <select>
-            {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>})}
-          </select>
-        </div>
-        <React3
-            clearColor={0x7ccaff}
-            clearAlpha={1}
-            alpha={true}
-            shadowMapEnabled={true}
-            antialias={true}
-            width={width}
-            height={height}
-            mainCamera="camera">
-          <scene>
-            <perspectiveCamera
-                name="camera"
-                fov={75}
-                aspect={width / height}
-                near={0.1}
-                far={1000}
-                position={this.cameraPosition}
-            />
-            <ambientLight color={0x000033} />
-            <directionalLight
-                color={this.directionaLightColor}
-                position={this.directionalLightPosition}
-                castShadow={true}
-                shadowMapWidth={2048}
-                shadowMapHeight={2048}
-                shadowCameraLeft={-150}
-                shadowCameraRight={150}
-                shadowCameraTop={150}
-                shadowCameraBottom={-150}
-                shadowCameraFar={3500}
-                shadowBias={-0.0001}
-            />
-            <hemisphereLight
-                skyColor={this.hemisphereLightSkyColor}
-                groundColor={this.hemisphereLightGroundColor}
-                position={this.hemisphereLightPosition}
-            />
-            <axisHelper size={10}/>
-            <Anchor />
-            <Ground />
-          </scene>          
-        </React3>
-      </div>
-    );
-  }
-};
 
 ReactDOM.render(<Editor />, document.getElementById('mount'));
 
