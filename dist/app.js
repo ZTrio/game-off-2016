@@ -8227,27 +8227,93 @@
 	var sel = document.createElement('select');
 	var fragment = document.createDocumentFragment();
 
-	var Editor = function (_React$Component) {
-	  _inherits(Editor, _React$Component);
+	var Ground = function (_React$Component) {
+	  _inherits(Ground, _React$Component);
 
-	  function Editor(props, context) {
-	    _classCallCheck(this, Editor);
+	  function Ground(props, context) {
+	    _classCallCheck(this, Ground);
 
-	    var _this = _possibleConstructorReturn(this, (Editor.__proto__ || Object.getPrototypeOf(Editor)).call(this, props, context));
-
-	    _this.cameraPosition = new _three2.default.Vector3(0, 25, 50);
-
-	    _this.directionalLightColor = new _three2.default.Color(0xffffff);
-	    _this.directionalLightColor.setHSL(0.1, 1, 0.95);
-	    _this.directionalLightPosition = new _three2.default.Vector3(10, 10.75, 10);
-	    _this.directionalLightPosition.multiplyScalar(10);
+	    var _this = _possibleConstructorReturn(this, (Ground.__proto__ || Object.getPrototypeOf(Ground)).call(this, props, context));
 
 	    _this.groundScale = new _three2.default.Vector3(1000, 1000, 1000);
 	    _this.groundTexRepeat = new _three2.default.Vector2(512 * 3, 512 * 3);
 	    _this.groundRotation = new _three2.default.Euler();
 	    _this.groundRotation.x = -Math.PI / 2;
-	    _this.state = {};
 	    return _this;
+	  }
+
+	  _createClass(Ground, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'mesh',
+	        { name: 'ground',
+	          scale: this.groundScale,
+	          rotation: this.groundRotation },
+	        _react2.default.createElement('planeBufferGeometry', { width: 100, height: 100 }),
+	        _react2.default.createElement(
+	          'meshPhongMaterial',
+	          { color: 0xFFFFFF },
+	          _react2.default.createElement('texture', {
+	            url: './assets/textures/grass.png',
+	            anisotropy: 1,
+	            repeat: this.groundTexRepeat,
+	            wrapS: _three2.default.RepeatWrapping,
+	            wrapT: _three2.default.RepeatWrapping
+	          })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Ground;
+	}(_react2.default.Component);
+
+	var Anchor = function (_React$Component2) {
+	  _inherits(Anchor, _React$Component2);
+
+	  function Anchor(props, context) {
+	    _classCallCheck(this, Anchor);
+
+	    return _possibleConstructorReturn(this, (Anchor.__proto__ || Object.getPrototypeOf(Anchor)).call(this, props, context));
+	  }
+
+	  _createClass(Anchor, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'mesh',
+	        null,
+	        _react2.default.createElement('boxGeometry', {
+	          width: 1,
+	          height: 1,
+	          depth: 1
+	        }),
+	        _react2.default.createElement('meshBasicMaterial', { color: 0xFF0000 })
+	      );
+	    }
+	  }]);
+
+	  return Anchor;
+	}(_react2.default.Component);
+
+	var Editor = function (_React$Component3) {
+	  _inherits(Editor, _React$Component3);
+
+	  function Editor(props, context) {
+	    _classCallCheck(this, Editor);
+
+	    var _this3 = _possibleConstructorReturn(this, (Editor.__proto__ || Object.getPrototypeOf(Editor)).call(this, props, context));
+
+	    _this3.cameraPosition = new _three2.default.Vector3(0, 25, 50);
+
+	    _this3.directionalLightColor = new _three2.default.Color(0xffffff);
+	    _this3.directionalLightColor.setHSL(0.1, 1, 0.95);
+	    _this3.directionalLightPosition = new _three2.default.Vector3(10, 10.75, 10);
+	    _this3.directionalLightPosition.multiplyScalar(10);
+
+	    _this3.state = {};
+	    return _this3;
 	  }
 
 	  _createClass(Editor, [{
@@ -8310,34 +8376,8 @@
 	              shadowCameraFar: 3500,
 	              shadowBias: -0.0001
 	            }),
-	            _react2.default.createElement(
-	              'mesh',
-	              { rotation: this.state.cubeRotation },
-	              _react2.default.createElement('boxGeometry', {
-	                width: 1,
-	                height: 1,
-	                depth: 1
-	              }),
-	              _react2.default.createElement('meshBasicMaterial', { color: 0x00ff00 })
-	            ),
-	            _react2.default.createElement(
-	              'mesh',
-	              { name: 'ground',
-	                scale: this.groundScale,
-	                rotation: this.groundRotation },
-	              _react2.default.createElement('planeBufferGeometry', { width: 100, height: 100 }),
-	              _react2.default.createElement(
-	                'meshPhongMaterial',
-	                { color: 0xFFFFFF },
-	                _react2.default.createElement('texture', {
-	                  url: './assets/textures/grass.png',
-	                  anisotropy: 1,
-	                  repeat: this.groundTexRepeat,
-	                  wrapS: _three2.default.RepeatWrapping,
-	                  wrapT: _three2.default.RepeatWrapping
-	                })
-	              )
-	            )
+	            _react2.default.createElement(Anchor, null),
+	            _react2.default.createElement(Ground, null)
 	          )
 	        )
 	      );
