@@ -2,6 +2,8 @@
 var webpack = require('webpack');
 
 module.exports = {
+  devtool: 'inline-source-map',
+  
   context: __dirname + "/src",
 
   entry: [
@@ -31,10 +33,8 @@ module.exports = {
           presets: ['es2015', 'react']
         }
       },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      }
+      { test: /\.json$/, loader: 'json-loader' },
+      { test: /\.png$/, loader: 'file' }
     ]
   },
 
