@@ -11,25 +11,26 @@ import Editor from './components/Editor';
 const OrbitControls = require('three-orbit-controls')(THREE);
 
 class EditorContainer extends React.Component {
-  constructor(){
-    super();
+  constructor(props, context){
+    super(props, context);
   }
 
   render() {
-    return
-    <div>
-      <div id="uiContainer">
-        <select>
-          {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>})}
-        </select>
+    return (
+      <div>
+        <div id="uiContainer">
+          <select>
+            {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>})}
+          </select>
+        </div>
+        <Editor />
       </div>
-      <Editor />
-    </div>
+    );
   }
 }
 
 
-ReactDOM.render(<Editor />, document.getElementById('mount'));
+ReactDOM.render(<EditorContainer />, document.getElementById('mount'));
 
 /* modelNames.forEach(function(modelName) {
    var opt = document.createElement('option');
