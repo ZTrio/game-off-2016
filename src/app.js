@@ -9,9 +9,6 @@ import modelNames from './modelNames.json';
 
 const OrbitControls = require('three-orbit-controls')(THREE);
 
-const viewWidth =  document.documentElement.clientWidth;
-const viewHeight =  document.documentElement.clientHeight;
-
 var sel = document.createElement('select');
 var fragment = document.createDocumentFragment();
 
@@ -19,14 +16,69 @@ var fragment = document.createDocumentFragment();
 class Editor extends React.Component {
   constructor(props, context){
     super(props, context);
+    this.cameraPosition = new THREE.Vector3(0, 25, 50);
+    this.directionalLightColor = new THREE.Color( 0xffffff );
+    this.directionalLightColor.setHSL(01,1,0.95);
+    this.directionalLightPosition = new THREE.Vector3(10, 10.75, 10);
+    this.directionalLightPosition.multiplyScalar(10);
+    this.state = {};
   }
 
   render(){
-    return <div>
-    <select>
-    {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>})}
-    </select>;
-    </div>
+    const width = window.innerWidth; // canvas width
+    const height = window.innerHeight; // canvas height    
+    
+    return (
+      <div>
+        <div id="uiContainer">
+          <select>
+            {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>})}
+          </select>
+        </div>
+        <React3
+            clearColor={0x7ccaff}
+            clearAlpha={1}
+            alpha={true}
+            shadowMapEnabled={true}
+            antialias={true}
+            width={width}
+            height={height}
+            mainCamera="camera">
+          <scene>
+            <perspectiveCamera
+                name="camera"
+                fov={75}
+                aspect={width / height}
+                near={0.1}
+                far={1000}
+                position={this.cameraPosition}
+            />
+            <ambientLight color={0x000033} />
+            <directionalLight
+                color={this.directionaLightColor}
+                position={this.directionalLightPosition}
+                castShadow={true}
+                shadowMapWidth={2048}
+                shadowMapHeight={2048}
+                sahadowCameraLeft={-150}
+                shadowCameraRight={150}
+                shadowCameraTop={150}
+                shadowCameraBottom={-150}
+                shadowCameraFar={3500}
+                shadowBias={-0.0001}
+            />
+            <mesh rotation={this.state.cubeRotation}>
+              <boxGeometry
+                  width={1}
+                  height={1}
+                  depth={1}
+              />
+              <meshBasicMaterial color={0x00ff00}/>
+            </mesh>
+          </scene>          
+        </React3>
+      </div>
+    );
   }
 };
 
