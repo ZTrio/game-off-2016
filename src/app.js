@@ -21,6 +21,7 @@ class Editor extends React.Component {
     this.directionalLightColor.setHSL(01,1,0.95);
     this.directionalLightPosition = new THREE.Vector3(10, 10.75, 10);
     this.directionalLightPosition.multiplyScalar(10);
+    this.groundScale = new THREE.Vector3(1000, 1000, 1000);
     this.state = {};
   }
 
@@ -74,6 +75,9 @@ class Editor extends React.Component {
                   depth={1}
               />
               <meshBasicMaterial color={0x00ff00}/>
+            </mesh>
+            <mesh name="ground" scale={this.groundScale}}>
+              <planeBufferGeometry width="100" height="100"/>
             </mesh>
           </scene>          
         </React3>
