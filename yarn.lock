@@ -1458,7 +1458,7 @@ fast-future@~1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/fast-future/-/fast-future-1.0.1.tgz#6cbd22d999ab39cd10fc79392486e7a678716818"
 
-fbjs@^0.8.1, fbjs@^0.8.4:
+fbjs@^0.8.4:
   version "0.8.6"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.6.tgz#7eb67d6986b2d5007a9b6e92e0e7cb6f75cad290"
   dependencies:
@@ -2019,7 +2019,7 @@ is-number@^2.0.2, is-number@^2.1.0:
 
 is-posix-bracket@^0.1.0:
   version "0.1.1"
-  resolved "https://registry.yarnpkg.com/is-posix-bracket/-/is-posix-bracket-0.1.1.tgz#3334dc79774368e92f016e6fbc0a88f5cd6e6bc4"
+  resolved "http://registry.npmjs.org/is-posix-bracket/-/is-posix-bracket-0.1.1.tgz#3334dc79774368e92f016e6fbc0a88f5cd6e6bc4"
 
 is-primitive@^2.0.0:
   version "2.0.0"
@@ -3329,13 +3329,9 @@ rc@^1.0.3, rc@~1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~1.0.4"
 
-react-dom@^15.3.1:
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.0.tgz#6a97a69000966570db48c746bc4b7b0ca50d1534"
-  dependencies:
-    fbjs "^0.8.1"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
+react-dom@15.3.1:
+  version "15.3.1"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.3.1.tgz#6d42cd2b64c8c5e0b693f3ffaec301e6e627e24e"
 
 react-three-renderer@^2.3.3:
   version "2.3.3"
@@ -3343,9 +3339,9 @@ react-three-renderer@^2.3.3:
   dependencies:
     fbjs "0.8.4"
 
-react@^15.3.1:
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.4.0.tgz#736c1c7c542e8088127106e1f450b010f86d172b"
+react@15.3.1:
+  version "15.3.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-15.3.1.tgz#f78501ed8c2ec6e6e31c3223652e97f1369d2bd6"
   dependencies:
     fbjs "^0.8.4"
     loose-envify "^1.1.0"
@@ -3850,7 +3846,7 @@ three-orbit-controls@^72.0.0:
   version "72.0.0"
   resolved "https://registry.yarnpkg.com/three-orbit-controls/-/three-orbit-controls-72.0.0.tgz#13a4cbf3780cc6e5446aed0032fe1c5135e72755"
 
-three@^0.79.0:
+three@0.79.0:
   version "0.79.0"
   resolved "https://registry.yarnpkg.com/three/-/three-0.79.0.tgz#3af96fda47f68b7ab093c298dfa335fa45da0cf4"
 
