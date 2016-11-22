@@ -54,7 +54,7 @@ const initialState = {
     },
 
     directionalLight: {
-      color: directionaLightColor,
+      color: directionalLightColor,
       position: directionalLightPosition,
       castShadow: true,
       shadowMapWidth: 2048,
