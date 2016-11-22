@@ -2,7 +2,7 @@
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: 'eval',
   
   context: __dirname + "/src",
 
@@ -20,6 +20,10 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.scss'],
   },
+  
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),    
+  ],
   
   module: {
     loaders: [
