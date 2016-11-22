@@ -21,10 +21,6 @@ module.exports = {
     extensions: ['', '.js', '.scss'],
   },
 
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
-
   module: {
     loaders: [
       {
