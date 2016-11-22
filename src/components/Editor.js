@@ -32,13 +32,15 @@ class Editor extends React.Component {
 
 Editor.propTypes = {
   camera: React.PropTypes.object,
+  viewport: React.PropTypes.object,
+  lights: React.PropTypes.object,  
 };
 
 export function mapStateToProps(state, ownProps) {
   return{
-    viewport: state.viewport,
-    camera: state.camera,
-    lights: state.lights
+    viewport: state.viewport.isRequired,
+    camera: state.camera.isRequired,
+    lights: state.lights,
   };
 }
 

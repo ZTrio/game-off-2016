@@ -25,6 +25,10 @@ hemisphereLightSkyColor.setHSL(0.6, 1, 0.6);
 const hemisphereLightGroundColor = new THREE.Color(0xffffff);
 hemisphereLightGroundColor.setHSL(0.095, 1, 0.75);
 
+function reducerThing(state, action){
+  return state;
+}
+
 const initialState = {
   viewport: {
     height,
@@ -47,7 +51,7 @@ const initialState = {
   lights: {
     ambientLight: {
       color: 0x000033
-    },  
+    },
 
     directionalLight: {
       color: directionaLightColor,
@@ -72,7 +76,7 @@ const initialState = {
   
 };
 
-let store = createStore({}, initialState);
+let store = createStore(reducerThing, initialState);
 
 class EditorContainer extends React.Component {
   constructor(props, context){
