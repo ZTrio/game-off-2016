@@ -12,14 +12,14 @@ class Editor extends React.Component {
       viewport,
       camera,
       lights
-    } = props;
+    } = this.props;
     
     return (
       <React3 {...viewport} mainCamera="camera">
         <scene>
           <perspectiveCamera name="camera" {...camera} />
           {Object.keys(lights).map((lightName) =>{
-             return <lightName {...lights[lightName]} />;
+             return React.createElement(lightName, Object.assign({}, {key: lightName}, lights[lightName]));
            })}
           <axisHelper size={10}/>
           <Anchor />
@@ -31,15 +31,15 @@ class Editor extends React.Component {
 };
 
 Editor.propTypes = {
-  camera: React.PropTypes.object,
-  viewport: React.PropTypes.object,
+  camera: React.PropTypes.object.isRequired,
+  viewport: React.PropTypes.object.isRequired,
   lights: React.PropTypes.object,  
 };
 
 export function mapStateToProps(state, ownProps) {
   return{
-    viewport: state.viewport.isRequired,
-    camera: state.camera.isRequired,
+    viewport: state.viewport,
+    camera: state.camera,
     lights: state.lights,
   };
 }

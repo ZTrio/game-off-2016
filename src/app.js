@@ -35,7 +35,7 @@ const initialState = {
     width, 
     alpha: true,
     antialias: true,
-    shadoMapEnabled: true,
+    shadowMapEnabled: true,
     clearColor: 0x7ccaff,
     clearAlpha: 1
   },
@@ -86,12 +86,14 @@ class EditorContainer extends React.Component {
   render() {
     return (
       <Provider store={store} >
-        <div id="uiContainer">
-          <select>
-            {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>}) }
-          </select>
+        <div>
+          <div id="uiContainer">
+            <select>
+              {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>}) }
+            </select>
+          </div>
+          <Editor />
         </div>
-        <Editor />
       </Provider>
     );
   }
