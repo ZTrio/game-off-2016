@@ -87,12 +87,12 @@ class EditorContainer extends React.Component {
     return (
       <Provider store={store} >
         <div>
-          <div id="uiContainer">
-            <select>
-              {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>}) }
-            </select>
-          </div>
-          <Editor />
+        <div id="uiContainer">
+          <select>
+            {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>}) }
+          </select>
+        </div>
+        <Editor />
         </div>
       </Provider>
     );
