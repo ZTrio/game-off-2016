@@ -3,32 +3,30 @@ var webpack = require('webpack');
 
 module.exports = {
   devtool: 'inline-source-map',
-  
+
   context: __dirname + "/src",
 
   entry: [
     'babel-polyfill',
     './app'
   ],
-  
+
   output: {
     path: __dirname + '/dist',
     publicpath: '/',
     filename: 'bundle.js'
   },
-  
+
   resolve: {
     extensions: ['', '.js', '.scss'],
   },
-  
+
   module: {
     loaders: [
-      { test: /\.jsx?$/,
+      {
+        test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react']
-        }
+        loader: 'babel'
       },
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.png$/, loader: 'file' }
@@ -40,5 +38,5 @@ module.exports = {
     __dirname: true,
     __filename: true
   },
-  
+
 };
