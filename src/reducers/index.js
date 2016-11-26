@@ -6,9 +6,8 @@ reducerRoutes['LOAD_VOX'] = function(state, action){
 
 reducerRoutes['LOAD_VOX_SUCCESS'] = function(state, action){
   state.voxelData[action.name] = {
-    position: action.position,
-    color: action.color,
-    mesh: action.mesh
+    geometry: action.geometry,
+    material: action.material,    
   };
 
   state.selectedModel = action.name;

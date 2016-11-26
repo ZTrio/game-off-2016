@@ -9,37 +9,41 @@ import { connect } from 'react-redux';
 let scene;
 
 class Editor extends React.Component {
-  /* voxelBufferResourceIterator(voxelData){
-   *   if(!Object.keys(voxelData).length){
-   *     return null;
-   *   }
+  voxelBufferResourceIterator(voxelData){
+    if(!Object.keys(voxelData).length){
+      return null;
+    }
 
-   *   return Object.keys(voxelData).map((voxelName) => {
-   *     return React.createElement(
-   *       'bufferGeometry',
-   *       Object.assign({
-   *         resourceId: voxelName,
-   *         name: "coolidge",
-   *       }, voxelData[voxelName])
-   *     );
-   *   });
-   * }
+    return Object.keys(voxelData).map((voxelName) => {
+      return React.createElement(
+        'bufferGeometry',
+        Object.assign({
+          resourceId: voxelName,
+          name: "coolidge",
+        }, voxelData[voxelName])
+      );
+    });
+  }
 
-   * selectedMesh(voxelData, selectedModel){
-   *   if(selectedModel &&
-   *      voxelData[selectedModel] &&
-   *      voxelData[selectedModel].position){
-   *     return (
-   *       <mesh>
-   *         <bufferGeometry position={voxelData[selectedModel].position}
-   *                         color={voxelData[selectedModel].color}/>
-   *         <meshBasicMaterial color={0xFF0000}/>
-   *       </mesh>
-   *     );
-   *   }
-   *   return null;
-   * }*/
+  selectedMesh(voxelData, selectedModel){
+    if(selectedModel &&
+       voxelData[selectedModel] &&
+       voxelData[selectedModel].geometry){
+      return (
+        <mesh geometry={voxelData[selectedModel].geometry}
+              material={voxelData[selectedModel].material} />
+      );
+    }
+    return null;
+  }
 
+  /*
+  *
+  * Really shitty we have to manually manage adding and removing the bufferGeometry
+  * meshes
+  *
+   */
+  
   ghettoAttachMesh(props){
     if(props.selectedModel &&
        props.voxelData[props.selectedModel] &&
@@ -74,6 +78,7 @@ class Editor extends React.Component {
           <perspectiveCamera name="camera" {...camera} />          
           <axisHelper size={10}/>
           <Anchor />
+          {this.selectedMesh(voxelData, selectedModel)}
           <Ground />
         </scene>          
       </React3>

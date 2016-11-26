@@ -34,7 +34,7 @@ const loadVoxFile = function(filename, callback){
       type:"LOAD_VOX",
       name: filename
     });
-    
+
     const vl = new VoxLoader({
       filename: `./assets/mmmm/vox/${filename}`,
       blockSize: 1
@@ -45,9 +45,8 @@ const loadVoxFile = function(filename, callback){
       dispatch({
         type: "LOAD_VOX_SUCCESS",
         name: filename,
-        position: vox.chunk.position,
-        color: vox.chunk.color,
-        mesh: vox.chunk.mesh
+        geometry: vox.chunk.geometry,
+        material: vox.chunk.material,
       });
     });    
   };

@@ -607,8 +607,8 @@ Chunk.prototype.Rebuild = function() {
   mesh.position.set(0, 0, 0);
   mesh.that = this;
 
-  this.position = mesh.geometry.getAttribute('position');
-  this.color = mesh.geometry.getAttribute('color');
+  this.geometry = geometry;
+  this.material = material3;
   
   this.mesh = mesh;
   this.GetBoundingBox();
