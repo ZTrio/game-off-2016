@@ -11,9 +11,15 @@ class Editor extends React.Component {
     if(!Object.keys(voxelData).length){
       return null;
     }
-    
+
     return Object.keys(voxelData).map((voxelName) => {
-      return React.createElement('bufferGeometry', Object.assign({resourceId: voxelName}, voxelData[voxelName]));
+      return React.createElement(
+        'bufferGeometry',
+        Object.assign({
+          resourceId: voxelName,
+          name: "coolidge",
+        }, voxelData[voxelName])
+      );
     });
   }
 
@@ -21,8 +27,8 @@ class Editor extends React.Component {
     if(selectedModel && voxelData[selectedModel] && voxelData[selectedModel].position){
       return (
         <mesh>
-          <meshLambertMaterial />
-          <geometryResource resourceId={selectedModel} />
+          <bufferGeometry position={voxelData[selectedModel].position} color={voxelData[selectedModel].color}/>
+          <meshBasicMaterial color={0xFF0000}/>
         </mesh>
       );
     }
@@ -40,14 +46,11 @@ class Editor extends React.Component {
     
     return (
       <React3 {...viewport} mainCamera="camera">
-        <resources>
-          {this.voxelDataIterator(voxelData)}
-        </resources>
         <scene>
-          <perspectiveCamera name="camera" {...camera} />
           {Object.keys(lights).map((lightName) =>{
              return React.createElement(lightName, Object.assign({key: lightName}, lights[lightName]));
            })}
+          <perspectiveCamera name="camera" {...camera} />          
           <axisHelper size={10}/>
           <Anchor />
           {this.selectedMesh(voxelData, selectedModel)}

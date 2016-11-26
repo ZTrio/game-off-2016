@@ -54,9 +54,8 @@ const loadVoxFile = function(filename, callback){
 
 
 const initialState = {
+  selectedModel: 'chr_fatkid.vox',  
   voxelData: {},
-
-  selectedModel: 'chr_fatkid.vox',
   
   viewport: {
     height,
@@ -122,7 +121,7 @@ function configureStore(initialState){
 }
 
 const store = configureStore(initialState);
-
+window.store = store;
 
 
 class EditorContainer extends React.Component {
@@ -134,9 +133,8 @@ class EditorContainer extends React.Component {
     store.dispatch(loadVoxFile('chr_fatkid.vox'));
   }
 
-  selectChangeHandler(){
-    debugger;
-    //store.dispatch()
+  selectChangeHandler(event){
+    store.dispatch(loadVoxFile(event.target.value));
   }
 
   render() {
