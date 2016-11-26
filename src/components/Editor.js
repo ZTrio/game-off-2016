@@ -9,22 +9,6 @@ import { connect } from 'react-redux';
 let scene;
 
 class Editor extends React.Component {
-  voxelBufferResourceIterator(voxelData){
-    if(!Object.keys(voxelData).length){
-      return null;
-    }
-
-    return Object.keys(voxelData).map((voxelName) => {
-      return React.createElement(
-        'bufferGeometry',
-        Object.assign({
-          resourceId: voxelName,
-          name: "coolidge",
-        }, voxelData[voxelName])
-      );
-    });
-  }
-
   selectedMesh(voxelData, selectedModel){
     if(selectedModel &&
        voxelData[selectedModel] &&
@@ -35,29 +19,6 @@ class Editor extends React.Component {
       );
     }
     return null;
-  }
-
-  /*
-  *
-  * Really shitty we have to manually manage adding and removing the bufferGeometry
-  * meshes
-  *
-   */
-  
-  ghettoAttachMesh(props){
-    if(props.selectedModel &&
-       props.voxelData[props.selectedModel] &&
-       props.voxelData[props.selectedModel].mesh){
-      this.refs.thescene.add(props.voxelData[props.selectedModel].mesh);
-      }
-  }
-  
-  componentDidMount(){
-    this.ghettoAttachMesh(this.props);
-  }
-
-  componentWillUpdate(nextProps, nextState){
-    this.ghettoAttachMesh(nextProps);
   }
 
   render(){
