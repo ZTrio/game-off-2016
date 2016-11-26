@@ -593,26 +593,27 @@ Chunk.prototype.Rebuild = function() {
 
   geometry.computeBoundingBox();
   geometry.computeVertexNormals();
+  
+  var material3 = new THREE.MeshLambertMaterial({ vertexColors: THREE.VertexColors, wireframe: this.wireframe});
+  
+  var mesh = new THREE.Mesh( geometry, material3);
 
-  this.position = geometry.getAttribute('position');
-  this.color = geometry.getAttribute('color');
+  //debugger;
+  mesh.rotation.set(-Math.PI/2, 0, Math.PI);
+  
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
 
-  /*
-   * var material3 = new THREE.MeshLambertMaterial({ vertexColors: THREE.VertexColors, wireframe: this.wireframe});
-   * 
-   * var mesh = new THREE.Mesh( geometry, material3);
-   * mesh.rotation.set(-Math.PI/2, 0, Math.PI);
-   * 
-   * mesh.castShadow = true;
-   * mesh.receiveShadow = true;
+  mesh.position.set(0, 0, 0);
+  mesh.that = this;
 
-   * mesh.position.set(0, 0, 0);
-   * mesh.that = this;
-   * this.mesh = mesh;
-  * this.GetBoundingBox();
-  */
-   this.isBuilt = true;
-   Utils.Log("VOX Model CREATED TRIANGLES: "+b);
+  this.position = mesh.geometry.getAttribute('position');
+  this.color = mesh.geometry.getAttribute('color');
+  
+  this.mesh = mesh;
+  this.GetBoundingBox();
+  this.isBuilt = true;
+  Utils.Log("VOX Model CREATED TRIANGLES: "+b);
 }; 
 
 Chunk.prototype.Destroy = function() {

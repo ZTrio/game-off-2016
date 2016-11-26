@@ -46,7 +46,8 @@ const loadVoxFile = function(filename, callback){
         type: "LOAD_VOX_SUCCESS",
         name: filename,
         position: vox.chunk.position,
-        color: vox.chunk.color
+        color: vox.chunk.color,
+        mesh: vox.chunk.mesh
       });
     });    
   };
