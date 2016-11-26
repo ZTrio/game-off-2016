@@ -581,37 +581,34 @@ Chunk.prototype.Rebuild = function() {
    var v = new THREE.BufferAttribute( new Float32Array( vertices.length * 3), 3 );
    for ( var i = 0; i < vertices.length; i++ ) {
        v.setXYZ(i, vertices[i][0], vertices[i][1], vertices[i][2]);
-      // console.log(i + ", "+ vertices[i][0] + ", "+ vertices[i][1]+ ", "+ vertices[i][2]);
    }
-   geometry.addAttribute( 'position', v );
+  geometry.addAttribute( 'position', v );
+  this.position = v;
 
    var c = new THREE.BufferAttribute(new Float32Array( colors.length *4), 4 );
    for ( var i = 0; i < colors.length; i++ ) {
        c.setXYZW( i, colors[i][0]/255, colors[i][1]/255, colors[i][2]/255, colors[i][3]/255);
       // c.setXYZW( i, Math.random(), Math.random(), Math.random(), Math.random() );
    }
-   geometry.addAttribute( 'color', c );
+  geometry.addAttribute( 'color', c );
+  this.color = c;
 
-   geometry.computeBoundingBox();
+  /* geometry.computeBoundingBox();
 
-   // geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -geometry.boundingBox.max.x/2,
-   //                                                           -geometry.boundingBox.max.z/2,
-   //                                                           0));
-   geometry.computeVertexNormals();
+   * geometry.computeVertexNormals();
 
-  var material3 = new THREE.MeshLambertMaterial({ vertexColors: THREE.VertexColors, wireframe: this.wireframe});
+   * var material3 = new THREE.MeshLambertMaterial({ vertexColors: THREE.VertexColors, wireframe: this.wireframe});
+   * 
+   * var mesh = new THREE.Mesh( geometry, material3);
+   * mesh.rotation.set(-Math.PI/2, 0, Math.PI);
+   * 
+   * mesh.castShadow = true;
+   * mesh.receiveShadow = true;
 
-  // geometry.center();
-   var mesh = new THREE.Mesh( geometry, material3);
-   mesh.rotation.set(-Math.PI/2, 0, Math.PI);
-   
-   mesh.castShadow = true;
-   mesh.receiveShadow = true;
-
-   mesh.position.set(0, 0 , 0);
-   mesh.that = this;
-   this.mesh = mesh;
-   this.GetBoundingBox();
+   * mesh.position.set(0, 0, 0);
+   * mesh.that = this;
+   * this.mesh = mesh;
+   * this.GetBoundingBox();*/
    this.isBuilt = true;
    Utils.Log("VOX Model CREATED TRIANGLES: "+b);
 }; 

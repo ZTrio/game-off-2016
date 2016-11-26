@@ -2,16 +2,19 @@ import React from 'react';
 import React3 from 'react-three-renderer';
 import ReactDOM from 'react-dom';
 import THREE from "three";
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import VoxLoader from './VoxLoader/Vox.js';
 import GameLoop from 'fixed-game-loop';
 import KeyDrown from 'keydrown';
 import modelNames from './modelNames.json';
 import Editor from './components/Editor';
+import rootReducer from './reducers/index';
 
+//TODO reverse engineer orbitcontrols in to reducer updates to camera position
+//const OrbitControls = require('three-orbit-controls')(THREE);
 
-const OrbitControls = require('three-orbit-controls')(THREE);
 const width = window.innerWidth; // canvas width
 const height =  window.innerHeight; // canvas height
 
@@ -25,11 +28,36 @@ hemisphereLightSkyColor.setHSL(0.6, 1, 0.6);
 const hemisphereLightGroundColor = new THREE.Color(0xffffff);
 hemisphereLightGroundColor.setHSL(0.095, 1, 0.75);
 
-function reducerThing(state, action){
-  return state;
-}
+const loadVoxFile = function(filename, callback){
+  return (dispatch, getState) => {
+    dispatch({
+      type:"LOAD_VOX",
+      name: filename
+    });
+    
+    const vl = new VoxLoader({
+      filename: `./assets/mmmm/vox/${filename}`,
+      blockSize: 1
+    });
+    
+    vl.LoadModel((vox) => {
+      vox.getChunk().Rebuild();      
+      dispatch({
+        type: "LOAD_VOX_SUCCESS",
+        name: filename,
+        position: vox.chunk.position,
+        color: vox.chunk.color
+      });
+    });    
+  };
+};
+
 
 const initialState = {
+  voxelData: {},
+
+  selectedModel: 'chr_fatkid.vox',
+  
   viewport: {
     height,
     width, 
@@ -76,11 +104,39 @@ const initialState = {
   
 };
 
-let store = createStore(reducerThing, initialState);
+function configureStore(initialState){
+  const store = createStore(
+    rootReducer,
+    initialState,
+    applyMiddleware(reduxThunk)
+  );
+
+  if(module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('./reducers', () => {
+      const nextRootReducer = require('./reducers/index');
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+  return store;
+}
+
+const store = configureStore(initialState);
+
+
 
 class EditorContainer extends React.Component {
   constructor(props, context){
     super(props, context);
+  }
+
+  componentDidMount(){
+    store.dispatch(loadVoxFile('chr_fatkid.vox'));
+  }
+
+  selectChangeHandler(){
+    debugger;
+    //store.dispatch()
   }
 
   render() {
@@ -88,7 +144,7 @@ class EditorContainer extends React.Component {
       <Provider store={store} >
         <div>
         <div id="uiContainer">
-          <select>
+          <select onChange={this.selectChangeHandler}>
             {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>}) }
           </select>
         </div>
