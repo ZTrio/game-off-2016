@@ -1,13 +1,13 @@
 import React from 'react';
 import React3 from 'react-three-renderer';
-import {Vector2, Vector3, Euler, RepeatWrapping} from 'three';
+import THREE from 'three';
 
 export default class Ground extends React.Component {
   constructor(props, context){
     super(props, context);
-    this.groundScale = new Vector3(1000, 1000, 1000);
-    this.groundTexRepeat = new Vector2(512*3, 512*3);
-    this.groundRotation = new Euler();
+    this.groundScale = new THREE.Vector3(1000, 1000, 1000);
+    this.groundTexRepeat = new THREE.Vector2(512*3, 512*3);
+    this.groundRotation = new THREE.Euler();
     this.groundRotation.x = - Math.PI / 2;
   }
 
@@ -22,8 +22,8 @@ export default class Ground extends React.Component {
               url="./assets/textures/grass.png"
               anisotropy={1}
               repeat={this.groundTexRepeat}
-              wrapS={RepeatWrapping}
-              wrapT={RepeatWrapping}
+              wrapS={THREE.RepeatWrapping}
+              wrapT={THREE.RepeatWrapping}
           />
         </meshPhongMaterial>
       </mesh>

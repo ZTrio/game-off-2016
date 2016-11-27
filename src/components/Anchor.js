@@ -14,6 +14,7 @@ export default class Anchor extends React.Component {
             depth={1}
         />
         <meshBasicMaterial color={0xFF0000}/>
+        {this.props.children}
       </mesh>      
     );
   }

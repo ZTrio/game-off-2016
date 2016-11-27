@@ -599,13 +599,13 @@ Chunk.prototype.Rebuild = function() {
   var mesh = new THREE.Mesh( geometry, material3);
 
   //debugger;
-  mesh.rotation.set(-Math.PI/2, 0, Math.PI);
+  //mesh.rotation.set(-Math.PI/2, 0, Math.PI);
   
-  mesh.castShadow = true;
-  mesh.receiveShadow = true;
+  //mesh.castShadow = true;
+  //mesh.receiveShadow = true;
 
-  mesh.position.set(0, 0, 0);
-  mesh.that = this;
+  //mesh.position.set(0, 0, 0);
+  //mesh.that = this;
 
   this.geometry = geometry;
   this.material = material3;
