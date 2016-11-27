@@ -10,7 +10,7 @@ reducerRoutes['LOAD_VOX_SUCCESS'] = function(state, action){
     material: action.material,    
   };
 
-  state.selectedModel = action.name;
+  state.selectedVoxFileName = action.name;
   return Object.assign({}, state);
 };
 

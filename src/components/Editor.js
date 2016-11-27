@@ -1,22 +1,18 @@
 import React from 'react';
 import React3 from 'react-three-renderer';
-import ReactDOM from 'react-dom';
-import THREE from "three";
 import Ground from './Ground';
 import Anchor from  './Anchor';
 import SelectedMesh from './SelectedMesh';
 import { connect } from 'react-redux';
 
-class Editor extends React.Component {
-  constructor(props, context){
-    super(props,context);
-  }
-  
+class Editor extends React.Component {  
   render(){
     const {
       viewport,
       camera,
       lights,
+      selectedVoxFileName,
+      voxelData,
     } = this.props;
     
     return (
@@ -27,13 +23,14 @@ class Editor extends React.Component {
            })}
           <perspectiveCamera name="camera" {...camera} />          
           <axisHelper size={10}/>
-          <SelectedMesh />
+          <SelectedMesh selectedVoxFileName={selectedVoxFileName} voxelData={voxelData}/>
           <Ground />
         </scene>          
       </React3>
     );
   }
 };
+
 
 Editor.propTypes = {
   camera: React.PropTypes.object.isRequired,
@@ -46,6 +43,8 @@ function mapStateToProps(state, ownProps) {
     viewport: state.viewport,
     camera: state.camera,
     lights: state.lights,
+    selectedVoxFileName: state.selectedVoxFileName,
+    voxelData: state.voxelData
   };
 }
 

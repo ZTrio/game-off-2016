@@ -54,7 +54,7 @@ const loadVoxFile = function(filename, callback){
 
 
 const initialState = {
-  selectedModel: 'chr_fatkid.vox',  
+  selectedVoxFileName: 'chr_fatkid.vox',  
   voxelData: {},
   
   viewport: {
@@ -125,8 +125,8 @@ window.store = store;
 
 
 class EditorContainer extends React.Component {
-  constructor(props, context){
-    super(props, context);
+  constructor(){
+    super();
   }
 
   componentDidMount(){
@@ -141,12 +141,12 @@ class EditorContainer extends React.Component {
     return (
       <Provider store={store} >
         <div>
-        <div id="uiContainer">
-          <select onChange={this.selectChangeHandler}>
-            {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>}) }
-          </select>
-        </div>
-        <Editor />
+          <div id="uiContainer">
+            <select onChange={this.selectChangeHandler}>
+              {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>}) }
+            </select>
+          </div>
+          <Editor />
         </div>
       </Provider>
     );
