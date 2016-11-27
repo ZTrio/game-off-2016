@@ -17,7 +17,7 @@ class Editor extends React.Component {
     
     return (
       <React3 {...viewport} mainCamera="camera">
-        <scene>
+        <scene ref="R3RScene">
           {Object.keys(lights).map((lightName) =>{
              return React.createElement(lightName, Object.assign({key: lightName}, lights[lightName]));
            })}

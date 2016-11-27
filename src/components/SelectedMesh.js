@@ -8,7 +8,34 @@ class SelectedMesh extends React.Component {
   constructor(props, context){
     super(props,context);
     this.rotation = new THREE.Euler(-Math.PI/2, 0, Math.PI);
-    this.position = new THREE.Vector3(0,0,0);    
+
+    this.state = {
+      localPosition: new THREE.Vector3(0,0,0)
+    }
+  }
+
+  centerLocalMesh(){
+    const mesh = this.refs.localMesh;
+    //TODO need a better refrence to `scene` this is super fragile
+    // need to updateMatrixWorld on scene to locally center the model here
+    mesh.parent.parent.updateMatrixWorld();
+    
+    const geometry = mesh.geometry;
+
+    geometry.computeBoundingBox(geometry);
+    const boundingBox = geometry.boundingBox;
+    const position = new THREE.Vector3();
+    position.subVectors( boundingBox.max, boundingBox.min );
+    position.multiplyScalar( 0.5 );
+    position.add( boundingBox.min );
+    position.applyMatrix4( mesh.matrixWorld );
+
+    mesh.position.x += -1 * position.x;
+    mesh.position.z += -1 * position.z;    
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    this.centerLocalMesh(prevProps);
   }
   
   render(){
@@ -24,12 +51,13 @@ class SelectedMesh extends React.Component {
     return (
       <group>
         <Anchor/>
-        <mesh geometry={voxelData[selectedVoxFileName].geometry}
+        <mesh ref="localMesh"
+              geometry={voxelData[selectedVoxFileName].geometry}
               material={voxelData[selectedVoxFileName].material}
               castShadow={true}
               receiveShadow={true}
               rotation={this.rotation}
-              position={this.position}/>
+              position={this.state.localPosition}/>
       </group>
     );
   }
