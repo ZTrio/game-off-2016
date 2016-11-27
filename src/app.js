@@ -125,10 +125,6 @@ window.store = store;
 
 
 class EditorContainer extends React.Component {
-  constructor(){
-    super();
-  }
-
   componentDidMount(){
     store.dispatch(loadVoxFile('chr_fatkid.vox'));
   }
