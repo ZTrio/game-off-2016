@@ -10,10 +10,17 @@ class DOMUI extends React.Component {
   }
 
   render() {
+    const { selectedVoxFileName } = this.props;
+    
     return (
       <div id="uiContainer">
         <select onChange={this.selectChangeHandler}>
-          {modelNames.map((modelName) => { return <option value={modelName} key={modelName}>{modelName}</option>}) }
+          <option value="">Select an entity</option>
+          {modelNames.map((modelName) => {
+             return <option value={modelName}
+                            selected={selectedVoxFileName === modelName ? true : null}
+                            key={modelName}>{modelName}</option>})
+          }
         </select>
       </div>
     );
@@ -25,6 +32,7 @@ function mapStateToProps(state, ownProps) {
     viewport: state.viewport,
     camera: state.camera,
     lights: state.lights,
+    selectedVoxFileName: state.selectedVoxFileName
   };
 }
 
