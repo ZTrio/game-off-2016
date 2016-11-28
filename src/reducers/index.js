@@ -1,10 +1,9 @@
 const reducerRoutes = {};
 reducerRoutes['MOUSE_MOVE'] = function(state, action){
-  state.mouse.x = action.x;
-  state.mouse.y = action.y;
+  state.mouse.position = action.position;
+  state.mouse.intersects = action.intersects;
   return Object.assign({}, state);
 };
-
 
 reducerRoutes['LOAD_VOX'] = function(state, action){
   state.voxelData[action.name] = {};

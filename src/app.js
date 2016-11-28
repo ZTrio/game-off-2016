@@ -44,7 +44,7 @@ class AppRoot extends React.Component {
       <Provider store={store} >
         <div>
           <DOMUI />
-          <Editor />
+          <Editor ref="editor"/>
         </div>
       </Provider>
     );

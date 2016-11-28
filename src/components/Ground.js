@@ -15,7 +15,8 @@ export default class Ground extends React.Component {
     return (
       <mesh name="ground"
             scale={this.groundScale}
-            rotation={this.groundRotation}>
+            rotation={this.groundRotation}
+            ref="mesh">
         <planeBufferGeometry width={100} height={100}/>
         <meshPhongMaterial color={0xFFFFFF}>
           <texture

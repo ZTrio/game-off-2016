@@ -1,7 +1,7 @@
-export default function mouseMove(x, y){
+export default function mouseMove(position, intersects){
   return {
     type: "MOUSE_MOVE",
-    x,
-    y
+    position,
+    intersects,
   };
 }

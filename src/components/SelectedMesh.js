@@ -35,25 +35,24 @@ class SelectedMesh extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    this.centerLocalMesh(prevProps);
+    if(prevProps.geometry !== this.props.geometry){
+      this.centerLocalMesh(prevProps);
+    }
   }
   
   render(){
     const {
-      selectedVoxFileName,
-      voxelData
+      position,
+      geometry,
+      material
     } = this.props;
-
-    if(!voxelData[selectedVoxFileName] || !voxelData[selectedVoxFileName].geometry){
-      return null;
-    }
     
     return (
-      <group>
+      <group position={position}>
         <Anchor/>
         <mesh ref="localMesh"
-              geometry={voxelData[selectedVoxFileName].geometry}
-              material={voxelData[selectedVoxFileName].material}
+              geometry={geometry}
+              material={material}
               castShadow={true}
               receiveShadow={true}
               rotation={this.rotation}

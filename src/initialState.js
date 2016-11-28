@@ -18,7 +18,12 @@ const initialState = {
 
   voxelData: {},
 
-  mouse: new THREE.Vector2(),
+  mouse: {
+    position: new THREE.Vector2(),
+    intersects: [],
+  },
+
+  groundIntersect: {},
   
   viewport: {
     height,
