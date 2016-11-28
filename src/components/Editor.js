@@ -11,6 +11,10 @@ import mouseMove from '../actions/mouseMove';
 import mouseClick from '../actions/mouseClick';
 import loadVoxFile from '../actions/loadVoxFile';
 
+//TODO reverse engineer orbitcontrols in to reducer updates to camera position
+const OrbitControls = require('three-orbit-controls')(THREE);
+
+
 class Editor extends React.Component {
   constructor(props, context){
     super(props,context);

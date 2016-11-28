@@ -18,7 +18,7 @@ class DOMUI extends React.Component {
           <option value="">Select an entity</option>
           {modelNames.map((modelName) => {
              return <option value={modelName}
-                            selected={selectedVoxFileName === modelName ? true : null}
+                            defaultValue={selectedVoxFileName}
                             key={modelName}>{modelName}</option>})
           }
         </select>
