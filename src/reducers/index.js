@@ -5,6 +5,17 @@ reducerRoutes['MOUSE_MOVE'] = function(state, action){
   return Object.assign({}, state);
 };
 
+reducerRoutes['MOUSE_CLICK'] = function(state, action){
+  if(!state.selectedVoxFileName){ return state; }
+  if(!state.mouse.intersects.length){ return state; }
+  
+  state.map.entities.push({
+    model: state.selectedVoxFileName,
+    position: state.mouse.intersects[0].point
+  });
+  return Object.assign({}, state);
+};
+
 reducerRoutes['LOAD_VOX'] = function(state, action){
   state.voxelData[action.name] = {};
   return Object.assign({}, state);

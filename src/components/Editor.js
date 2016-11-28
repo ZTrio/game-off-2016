@@ -8,6 +8,7 @@ import Ground from './Ground';
 import SelectedMesh from './SelectedMesh';
 
 import mouseMove from '../actions/mouseMove';
+import mouseClick from '../actions/mouseClick';
 import loadVoxFile from '../actions/loadVoxFile';
 
 class Editor extends React.Component {
@@ -17,6 +18,11 @@ class Editor extends React.Component {
     this.mouseVector = new THREE.Vector2();
     this.intersects = [];
     window.addEventListener( 'mousemove', this.onMouseMove.bind(this), false );
+    window.addEventListener( 'click', this.onMouseClick.bind(this), false);
+  }
+
+  onMouseClick(){
+    this.props.mouseClick();
   }
 
   onMouseMove(){
@@ -36,7 +42,8 @@ class Editor extends React.Component {
       voxelData,
       selectedPosition,
       selectedGeometry,
-      selectedMaterial
+      selectedMaterial,
+      entities
     } = this.props;
 
     return (
@@ -54,6 +61,13 @@ class Editor extends React.Component {
                         position={selectedPosition}/>
             :
             null }
+          {entities.map((entity, index) => {
+             return <SelectedMesh key={index + "_" + entity.model}
+                                  geometry={voxelData[entity.model].geometry}
+                                  material={voxelData[entity.model].material}
+                                  position={entity.position}
+                    />
+          })}
           <Ground ref='ground' />
         </scene>          
       </React3>
@@ -91,12 +105,14 @@ function mapStateToProps(state, ownProps) {
     selectedPosition,
     selectedGeometry,
     selectedMaterial,
+    entities: state.map.entities
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    mouseMove
+    mouseMove,
+    mouseClick
   }, dispatch);
 }
 

@@ -14,9 +14,13 @@ const hemisphereLightGroundColor = new THREE.Color(0xffffff);
 hemisphereLightGroundColor.setHSL(0.095, 1, 0.75);
 
 const initialState = {
-  selectedVoxFileName: 'chr_fatkid.vox',  
+  selectedVoxFileName: '',  
 
   voxelData: {},
+
+  map:{
+    entities:[]
+  },  
 
   mouse: {
     position: new THREE.Vector2(),
@@ -67,7 +71,7 @@ const initialState = {
       groundColor: hemisphereLightGroundColor,
       position: new THREE.Vector3(0, 500, 0),
     }
-  }
+  },
   
 };
 
