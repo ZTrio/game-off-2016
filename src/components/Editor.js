@@ -37,6 +37,16 @@ class Editor extends React.Component {
     this.props.mouseMove(this.mouseVector, this.intersects);
   }
 
+  componentDidMount() {
+    const controls = new OrbitControls(this.refs.camera);
+    this.controls = controls;
+  }
+
+  componentWillUnmount() {
+    this.controls.dispose();
+    delete this.controls;
+  }
+
   render(){
     const {
       viewport,
