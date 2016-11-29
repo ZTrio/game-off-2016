@@ -10,11 +10,11 @@ class SelectedMesh extends React.Component {
     this.rotation = new THREE.Euler(-Math.PI/2, 0, Math.PI);
 
     this.state = {
-      localPosition: new THREE.Vector3(0,0,0)
+      localOffset: new THREE.Vector3(0,0,0)
     }
   }
 
-  centerLocalMesh(){
+  calculateOffset(){
     const mesh = this.refs.localMesh;
     //TODO need a better refrence to `scene` this is super fragile
     // need to updateMatrixWorld on scene to locally center the model here
@@ -24,22 +24,31 @@ class SelectedMesh extends React.Component {
 
     geometry.computeBoundingBox(geometry);
     const boundingBox = geometry.boundingBox;
-    const position = new THREE.Vector3();
-    position.subVectors( boundingBox.max, boundingBox.min );
-    position.multiplyScalar( 0.5 );
-    position.add( boundingBox.min );
-    position.applyMatrix4( mesh.matrixWorld );
+    const offset = new THREE.Vector3();
+    offset.subVectors( boundingBox.max, boundingBox.min );
+    offset.multiplyScalar( 0.5 );
+    offset.add( boundingBox.min );
+    offset.applyMatrix4( mesh.matrixWorld );
 
-    mesh.position.x += -1 * position.x;
-    mesh.position.z += -1 * position.z;    
+    offset.multiplyScalar(-1);
+    offset.setY(0);
+    /* mesh.position.x += -1 * offset.x;
+     * mesh.position.z += -1 * offset.z;*/
+    this.setState({
+      localOffset: offset
+    });
   }
 
-  componentDidUpdate(prevProps, prevState){
-    if(prevProps.geometry !== this.props.geometry){
-      this.centerLocalMesh(prevProps);
-    }
-  }
-  
+  /* componentDidUpdate(prevProps, prevState){
+   *   if(prevProps.geometry !== this.props.geometry){
+   *     this.calculateOffset();
+   *   }
+   * }*/
+
+  componentDidMount(prevProps, prevState){
+    this.calculateOffset();
+  }  
+
   render(){
     const {
       position,
@@ -56,7 +65,7 @@ class SelectedMesh extends React.Component {
               castShadow={true}
               receiveShadow={true}
               rotation={this.rotation}
-              position={this.state.localPosition}/>
+              position={this.state.localOffset}/>
       </group>
     );
   }

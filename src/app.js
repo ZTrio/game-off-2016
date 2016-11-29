@@ -13,8 +13,6 @@ import rootReducer from './reducers/index';
 import Editor from './components/Editor';
 import DOMUI from './components/DOMUI';
 
-//TODO reverse engineer orbitcontrols in to reducer updates to camera position
-//const OrbitControls = require('three-orbit-controls')(THREE);
 import initialState from './initialState';
 
 function configureStore(initialState){
