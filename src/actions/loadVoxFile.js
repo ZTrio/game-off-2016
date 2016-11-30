@@ -7,6 +7,7 @@ const loadVoxFile = function(filename, callback){
       name: filename
     });
 
+
     const vl = new VoxLoader({
       filename: `./assets/mmmm/vox/${filename}`,
       blockSize: 1

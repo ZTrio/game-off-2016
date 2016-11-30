@@ -594,7 +594,9 @@ Chunk.prototype.Rebuild = function() {
   geometry.computeBoundingBox();
   geometry.computeVertexNormals();
   
-  var material3 = new THREE.MeshLambertMaterial({ vertexColors: THREE.VertexColors, wireframe: this.wireframe});
+  var material3 = new THREE.MeshLambertMaterial({
+    vertexColors: THREE.VertexColors,
+  });
   
   var mesh = new THREE.Mesh( geometry, material3);
 

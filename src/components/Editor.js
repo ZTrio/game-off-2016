@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Ground from './Ground';
-import SelectedMesh from './SelectedMesh';
+import CursorEntity from './CursorEntity';
+import PlacedEntity from './PlacedEntity';
 
 import mouseMove from '../actions/mouseMove';
 import mouseClick from '../actions/mouseClick';
@@ -68,15 +69,15 @@ class Editor extends React.Component {
              return React.createElement(lightName, Object.assign({key: lightName}, lights[lightName]));
            })}
           <perspectiveCamera name="camera" {...camera} ref="camera"/>          
-          <axisHelper size={10}/>
+          <axisHelper size={15}/>
           { selectedGeometry ? 
-          <SelectedMesh geometry={selectedGeometry}
+          <CursorEntity geometry={selectedGeometry}
                         material={selectedMaterial}
                         position={selectedPosition}/>
             :
             null }
           {entities.map((entity, index) => {
-             return <SelectedMesh key={index + "_" + entity.model}
+             return <PlacedEntity key={index + "_" + entity.model}
                                   geometry={voxelData[entity.model].geometry}
                                   material={voxelData[entity.model].material}
                                   position={entity.position}
@@ -107,7 +108,7 @@ function mapStateToProps(state, ownProps) {
   let selectedMaterial = null;
   if(state.voxelData[state.selectedVoxFileName]){
     selectedGeometry = state.voxelData[state.selectedVoxFileName].geometry;
-    selectedMaterial = state.voxelData[state.selectedVoxFileName].material;    
+    selectedMaterial = state.voxelData[state.selectedVoxFileName].faded;
   }
   
   return{

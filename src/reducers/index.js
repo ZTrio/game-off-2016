@@ -22,9 +22,16 @@ reducerRoutes['LOAD_VOX'] = function(state, action){
 };
 
 reducerRoutes['LOAD_VOX_SUCCESS'] = function(state, action){
+  const faded = action.material.clone();
+  faded.transparent = true;
+  faded.opacity = 0.5;
+
+  action.geometry.computeBoundingBox();
+  
   state.voxelData[action.name] = {
     geometry: action.geometry,
-    material: action.material,    
+    material: action.material,
+    faded,
   };
 
   state.selectedVoxFileName = action.name;
